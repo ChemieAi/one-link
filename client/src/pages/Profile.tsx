@@ -20,22 +20,33 @@ const Profile = () => {
     };
     fetch();
   }, [username]);
-console.log("username parametresi:", username);
 
-  if (notFound) return <h2>Kullanıcı bulunamadı</h2>;
+  if (notFound)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <h2 className="text-red-500 text-xl font-semibold">Kullanıcı bulunamadı.</h2>
+      </div>
+    );
 
   return (
-    <div>
-      <h2>@{username}</h2>
-      <ul>
-        {links.map((link) => (
-          <li key={link._id}>
-            <a href={link.url} target="_blank" rel="noreferrer">
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-white flex flex-col items-center p-6">
+      <div className="max-w-md w-full text-center">
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">@{username}</h1>
+
+        <div className="space-y-4">
+          {links.map((link) => (
+            <a
+              key={link._id}
+              href={link.url}
+              target="_blank"
+              rel="noreferrer"
+              className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition"
+            >
               {link.title}
             </a>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

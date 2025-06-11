@@ -11,20 +11,29 @@ const Navbar = () => {
   };
 
   return (
-    <nav style={{ display: "flex", gap: "1rem", padding: "1rem" }}>
-      <Link to="/">Ana Sayfa</Link>
-      {user ? (
-        <>
-          <Link to="/dashboard">Dashboard</Link>
-          <span>Kullanıcı: {user.username}</span>
-          <button onClick={handleLogout}>Çıkış</button>
-        </>
-      ) : (
-        <>
-          <Link to="/login">Giriş</Link>
-          <Link to="/register">Kayıt</Link>
-        </>
-      )}
+    <nav className="bg-white shadow px-6 py-4 flex justify-between items-center">
+      <div className="flex gap-4 text-blue-600 font-semibold">
+        <Link to="/">OneLink</Link>
+        {user && <Link to="/dashboard">Dashboard</Link>}
+      </div>
+      <div className="flex items-center gap-4">
+        {user ? (
+          <>
+            <span className="text-gray-700">Kullanıcı: {user.username}</span>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+            >
+              Çıkış
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="text-blue-500">Giriş</Link>
+            <Link to="/register" className="text-blue-500">Kayıt</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 };

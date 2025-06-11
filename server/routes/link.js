@@ -48,4 +48,15 @@ router.get("/public/:username", async (req, res) => {
   res.json({ username: user.username, links });
 });
 
+// KULLANICIYA AİT KENDİ LİNKLERİNİ GETİR
+router.get("/mine", auth, async (req, res) => {
+  try {
+    const links = await Link.find({ userId: req.userId }).sort("order");
+    res.json(links);
+  } catch (err) {
+    res.status(500).json({ message: "Linkler alınamadı.", error: err });
+  }
+});
+
+
 module.exports = router;
