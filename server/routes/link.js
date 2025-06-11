@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const Link = require("../models/Link");
+const User = require("../models/User");
 
 const router = express.Router();
 
@@ -36,6 +37,15 @@ router.post("/", auth, async (req, res) => {
 router.delete("/:id", auth, async (req, res) => {
   await Link.findOneAndDelete({ _id: req.params.id, userId: req.userId });
   res.json({ message: "Silindi." });
+});
+
+// PUBLIC: Kullanıcının herkese açık linklerini getir
+router.get("/public/:username", async (req, res) => {
+  const user = await User.findOne({ username: req.params.username });
+  if (!user) return res.status(404).json({ message: "Kullanıcı bulunamadı." });
+
+  const links = await Link.find({ userId: user._id }).sort("order");
+  res.json({ username: user.username, links });
 });
 
 module.exports = router;

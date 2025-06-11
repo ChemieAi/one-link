@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/u/:username" element={<Profile />} />
         </Routes>
       </Router>
     </AuthProvider>
