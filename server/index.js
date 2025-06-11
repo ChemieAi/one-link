@@ -28,3 +28,7 @@ app.get("/", (req, res) => {
 // Server başlat
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Sunucu ${PORT} portunda çalışıyor`));
+
+// Link routes
+const linkRoutes = require("./routes/link");
+app.use("/api/links", linkRoutes);
